@@ -82,9 +82,9 @@ CPPFLAGS = -DSTM32F303xE
 # Add include path for headers
 CPPFLAGS += -Iinclude
 # Lock GPIO ports in system_init() (requires power on reset to clear)
-#CPPFLAGS += -DLOCK_GPIO
+CPPFLAGS += -DLOCK_GPIO
 # Enable IWDG in user interface handler
-#CPPFLAGS += -DUSE_IWDG
+CPPFLAGS += -DUSE_IWDG
 
 # Store firmware version in binary
 CPPFLAGS += -DSYSTEMVERSION=$(VERSION)
@@ -138,8 +138,7 @@ NMFLAGS = -n -r
 DISFLAGS = -d -S
 OBJDUMP = arm-none-eabi-objdump
 GPG = gpg2
-GPGFLAGS = -a -b -u $(GPGKEY)
-GPGFLAGS += --comment "Signature for $(FIRMWARE)"
+GPGFLAGS = -b -u $(GPGKEY)
 
 # Default target is $(TARGET)
 .PHONY: elf

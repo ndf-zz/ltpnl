@@ -6,8 +6,8 @@
 #include "well512.h"
 #include "mca.h"
 
-#define BVMAX 32U
-#define BVUP 2U
+#define BVMAX 60U
+#define BVUP 3U
 #define BVDOWN 1U
 
 void main(void)
@@ -18,6 +18,8 @@ void main(void)
 	display_init(bv);
 	wellrng512_init();
 	struct sim *g = gol_init();
+	if (IS_ENABLED(USE_IWDG))
+		IWDG->KR = 0xccccU;
 	do {
 		wait_for_interrupt();
 		if (Uptime != lt) {
@@ -46,5 +48,7 @@ void main(void)
 			/* transfer */
 			display_transfer();
 		}
+		if (IS_ENABLED(USE_IWDG))
+			IWDG->KR = 0xaaaaU;
 	} while(1);
 }

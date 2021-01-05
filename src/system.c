@@ -1,8 +1,6 @@
 /*
  * Lattice Panel: System Initialisation
  *
- * Prepare hardware and then call into main()
- *
  * Includes default, reset, systick and fault handlers.
  */
 #include "stm32f3xx.h"
@@ -166,7 +164,7 @@ void Reset_Handler(void)
 	barrier();
 	PWR->CR &= (~PWR_CR_DBP);
 
-	/* Start the uptime clock */
+	/* Start the uptime clock and call main */
 	Uptime = 0UL;
 	SysTick_Config(400000UL);
 	__DSB();
